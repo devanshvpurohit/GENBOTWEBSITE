@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GENBOT | Core Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --background-dark: #000000;
+      --text-metallic: #d3d3d3;
+      --text-medium: #a0a0a0;
+      --highlight-color: #ff6600;
+      --subtle-graphic: #444444;
+      --card-bg: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: var(--background-dark);
+      color: var(--text-metallic);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background-color: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--subtle-graphic);
+    }
+
+    nav .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: var(--text-metallic);
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: var(--highlight-color);
+    }
+
+    main {
+      display: flex;
+      flex-direction: row;
+      padding: 3rem 2rem;
+      flex: 1;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .team-section {
+      flex: 2;
+      min-width: 300px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: var(--highlight-color);
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      border-bottom: 2px solid var(--highlight-color);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--subtle-graphic);
+      border-radius: 12px;
+      padding: 1.2rem;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      border-color: var(--highlight-color);
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-metallic);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: var(--text-medium);
+      margin-bottom: 0.3rem;
+    }
+
+    .model-viewer {
+      flex: 1;
+      min-width: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .model-viewer iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 500px;
+      border: none;
+      border-radius: 12px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 1rem;
+      color: var(--text-medium);
+      border-top: 1px solid var(--subtle-graphic);
+      background: #0d0d0d;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+      }
+
+      .model-viewer iframe {
+        min-height: 400px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">GENBOT</div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="project.html">Projects</a></li>
+      <li><a href="team.html">Team</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Team Content -->
+    <div class="team-section">
+      <h1>Core Team 2025–2026</h1>
+
+      <!-- Executive Committee -->
+      <section>
+        <h2>Executive Committee</h2>
+        <div class="team-grid">
+          <div class="card">
+            <h3>Devansh V Purohit</h3>
+            <p>President</p>
+            <p>CSE – AI & ML</p>
+            <p>23951A66D2</p>
+          </div>
+          <div class="card">
+            <h3>Rex Ryan</h3>
+            <p>Vice President</p>
+            <p>CSE – AI & ML</p>
+            <p>23951A66D9</p>
+          </div>
+          <div class="card">
+            <h3>Hisham Khan</h3>
+            <p>Secretary</p>
+            <p>Aeronautical Engineering</p>
+            <p>23951A2119</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Department Representatives -->
+      <section>
+        <h2>Department Representatives</h2>
+        <div class="team-grid">
+          <div class="card">
+            <h3>G. Jagadesh</h3>
+            <p>Department Representative</p>
+            <p>Aeronautical Engineering</p>
+            <p>23951A2120</p>
+          </div>
+          <div class="card">
+            <h3>Gautham Sharma</h3>
+            <p>Department Representative</p>
+            <p>Computer Science Engineering</p>
+            <p>23951A052J</p>
+          </div>
+          <div class="card">
+            <h3>Samkisha Sai T.</h3>
+            <p>Department Representative</p>
+            <p>CSE – AI & ML (CSM)</p>
+            <p>23951A66G8</p>
+          </div>
+          <div class="card">
+            <h3>Arnav J.</h3>
+            <p>Department Representative</p>
+            <p>Electronics & Communication</p>
+            <p>23951A0424</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Operations & Creative -->
+      <section>
+        <h2>Operations & Creative Team</h2>
+        <div class="team-grid">
+          <div class="card">
+            <h3>Rishika G.</h3>
+            <p>Events Coordinator</p>
+            <p>CSE – AI & ML</p>
+            <p>23951A66E3</p>
+          </div>
+          <div class="card">
+            <h3>Rishika N.</h3>
+            <p>Content Writing Lead</p>
+            <p>CSE – AI & ML</p>
+            <p>23951A66E4</p>
+          </div>
+          <div class="card">
+            <h3>Kranthi KVS</h3>
+            <p>Design Head</p>
+            <p>Computer Science Engineering</p>
+            <p>23951A05CR</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 3D Model Viewer -->
+    <div class="model-viewer">
+      <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-XDFrw2PwRDLU1KM9cIXPjpVO/" allowfullscreen></iframe>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    GenBot Robotics Club – IARE, Hyderabad | 📧 robotics@iare.ac.in | 📱 +91 8074237354<br />
+    &copy; 2025 GENBOT. Powered by J.A.R.V.I.S.
+  </footer>
+</body>
+</html>
+
