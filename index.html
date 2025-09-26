@@ -17,11 +17,7 @@
       --subtle-graphic: #444444;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Orbitron', sans-serif;
@@ -34,7 +30,6 @@
       overflow-x: hidden;
     }
 
-    /* Canvas background */
     canvas#constellation {
       position: fixed;
       top: 0;
@@ -56,17 +51,9 @@
       z-index: 2;
     }
 
-    nav .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--text-metallic);
-    }
+    nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-metallic); }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2rem;
-    }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
 
     nav ul li a {
       color: var(--text-metallic);
@@ -75,156 +62,68 @@
       transition: color 0.3s ease;
     }
 
-    nav ul li a:hover {
-      color: #00ffff;
-    }
+    nav ul li a:hover { color: #00ffff; }
 
-    .layout {
-      display: flex;
-      flex: 1;
-      min-height: 100vh;
-      flex-direction: row;
-      position: relative;
-      z-index: 1;
-    }
+    .layout { display: flex; flex: 1; min-height: 100vh; flex-direction: row; position: relative; z-index: 1; }
 
-    .left-side {
-      flex: 1;
-      padding: 4rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
+    .left-side { flex: 1; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; position: relative; }
 
     .ghost-text {
-      position: absolute;
-      top: 10%;
-      left: 5%;
-      font-size: 8rem;
-      color: var(--subtle-graphic);
-      font-weight: bold;
-      opacity: 0.1;
-      z-index: 0;
-      pointer-events: none;
-      user-select: none;
+      position: absolute; top: 10%; left: 5%; font-size: 8rem;
+      color: var(--subtle-graphic); font-weight: bold; opacity: 0.1;
+      z-index: 0; pointer-events: none; user-select: none;
     }
 
-    .content {
-      z-index: 1;
-      position: relative;
-      max-width: 600px;
-    }
+    .content { z-index: 1; position: relative; max-width: 600px; }
+    .content h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-metallic); }
+    .content p { font-size: 1rem; color: var(--text-medium); margin-bottom: 2rem; line-height: 1.6; }
 
-    .content h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--text-metallic);
-    }
+    .buttons { display: flex; gap: 1rem; }
 
-    .content p {
-      font-size: 1rem;
-      color: var(--text-medium);
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
+    .btn { padding: 0.75rem 1.5rem; border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
+    .btn-dark { background-color: var(--button-bg); color: var(--button-text); }
+    .btn-dark:hover { background-color: #000; }
+    .btn-outline { background: transparent; color: var(--text-metallic); border: 2px solid var(--text-metallic); }
+    .btn-outline:hover { background: var(--text-metallic); color: var(--element-black); }
 
-    .buttons {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      font-size: 0.9rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-dark {
-      background-color: var(--button-bg);
-      color: var(--button-text);
-    }
-
-    .btn-dark:hover {
-      background-color: #000;
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-metallic);
-      border: 2px solid var(--text-metallic);
-    }
-
-    .btn-outline:hover {
-      background: var(--text-metallic);
-      color: var(--element-black);
-    }
-
-    .right-side {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-    }
-
-    .right-side iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-      border: none;
-    }
+    .right-side { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0; }
+    .right-side iframe { width: 100%; height: 100%; min-height: 100vh; border: none; }
 
     footer {
-      text-align: center;
-      font-size: 0.85rem;
-      padding: 1rem;
-      color: var(--text-medium);
-      border-top: 1px solid var(--subtle-graphic);
-      background: rgba(13, 13, 13, 0.9);
-      position: relative;
-      z-index: 2;
+      text-align: center; font-size: 0.85rem; padding: 1rem;
+      color: var(--text-medium); border-top: 1px solid var(--subtle-graphic);
+      background: rgba(13, 13, 13, 0.9); position: relative; z-index: 2;
+    }
+
+    #cursor {
+      position: fixed; width: 20px; height: 20px;
+      background: cyan; border-radius: 50%;
+      pointer-events: none; transform: translate(-50%, -50%);
+      z-index: 1000; mix-blend-mode: difference;
+      transition: background 0.2s ease;
+    }
+
+    .swipe-feedback {
+      position: fixed; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem; color: #00ffff;
+      opacity: 0; transition: opacity 0.3s ease;
+      z-index: 1001; pointer-events: none;
     }
 
     @media (max-width: 960px) {
-      .layout {
-        flex-direction: column-reverse;
-      }
-
-      nav ul {
-        flex-direction: column;
-        gap: 1rem;
-        text-align: center;
-        padding-top: 1rem;
-      }
-
-      .ghost-text {
-        font-size: 4rem;
-        top: 5%;
-        left: 3%;
-      }
-
-      .content h1 {
-        font-size: 2rem;
-      }
-
-      .right-side iframe {
-        min-height: 400px;
-      }
+      .layout { flex-direction: column-reverse; }
+      nav ul { flex-direction: column; gap: 1rem; text-align: center; padding-top: 1rem; }
+      .ghost-text { font-size: 4rem; top: 5%; left: 3%; }
+      .content h1 { font-size: 2rem; }
+      .right-side iframe { min-height: 400px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Constellation Background -->
   <canvas id="constellation"></canvas>
 
-  <!-- Navigation Bar -->
   <nav>
     <div class="logo">GENBOT</div>
     <ul>
@@ -236,14 +135,11 @@
   </nav>
 
   <div class="layout">
-    <!-- Text Content (Left Side) -->
     <div class="left-side">
       <div class="ghost-text">GENBOT</div>
       <div class="content">
         <h1>Welcome to GenBot</h1>
-        <p>
-          Explore the future of robotics with NexBot — our cutting-edge student-built robot. At GenBot Robotics Club, we innovate, code, and design with passion. Join us in building the next generation of intelligent machines.
-        </p>
+        <p>Explore the future of robotics with NexBot — our cutting-edge student-built robot. At GenBot Robotics Club, we innovate, code, and design with passion. Join us in building the next generation of intelligent machines.</p>
         <div class="buttons">
           <button onclick="window.open('https://www.instagram.com/genbot_iare','_blank')" class="btn btn-dark">Join us on Instagram</button>
           <button class="btn btn-outline">Explore More</button>
@@ -251,35 +147,37 @@
       </div>
     </div>
 
-    <!-- Robot Section (Right Side) -->
     <div class="right-side">
       <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-XDFrw2PwRDLU1KM9cIXPjpVO/" allowfullscreen></iframe>
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     GenBot Robotics Club – IARE, Hyderabad | 📧 robotics@iare.ac.in | 📱 +91 8074237354<br />
     &copy; 2025 GENBOT. Powered by J.A.R.V.I.S.
   </footer>
 
-  <!-- Constellation Script -->
+  <div id="cursor"></div>
+  <div class="swipe-feedback" id="swipeFeedback">Swipe!</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
   <script>
     const canvas = document.getElementById("constellation");
     const ctx = canvas.getContext("2d");
+    const cursor = document.getElementById("cursor");
+    const swipeFeedback = document.getElementById("swipeFeedback");
 
     let stars = [];
     const starCount = 120;
     let mouse = { x: null, y: null };
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    // Initialize stars
     for (let i = 0; i < starCount; i++) {
       stars.push({
         x: Math.random() * canvas.width,
@@ -290,72 +188,102 @@
       });
     }
 
-    // Track mouse
-    document.addEventListener("mousemove", (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-    });
+    let smoothX = null, smoothY = null;
+    let pinchStart = null;
+    let pinchCooldown = false;
+
+    function showSwipeFeedback() {
+      swipeFeedback.style.opacity = 1;
+      setTimeout(() => { swipeFeedback.style.opacity = 0; }, 500);
+    }
 
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
-        const distMouse = mouse.x
-          ? Math.hypot(s.x - mouse.x, s.y - mouse.y)
-          : Infinity;
+        const distMouse = mouse.x ? Math.hypot(s.x - mouse.x, s.y - mouse.y) : Infinity;
 
-        // Draw star
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-
-        if (distMouse < 150) {
-          ctx.fillStyle = "#fff"; // bright white near cursor
-          ctx.shadowBlur = 10;
-          ctx.shadowColor = "#aaa";
-        } else {
-          ctx.fillStyle = "#888"; // normal gray
-          ctx.shadowBlur = 0;
-        }
+        if (distMouse < 150) { ctx.fillStyle = "#fff"; ctx.shadowBlur = 10; ctx.shadowColor = "#aaa"; }
+        else { ctx.fillStyle = "#888"; ctx.shadowBlur = 0; }
         ctx.fill();
 
-        // Connect nearby stars
         for (let j = i + 1; j < stars.length; j++) {
           const s2 = stars[j];
           const dist = Math.hypot(s.x - s2.x, s.y - s2.y);
-
           if (dist < 120) {
             ctx.beginPath();
             ctx.moveTo(s.x, s.y);
             ctx.lineTo(s2.x, s2.y);
-            ctx.strokeStyle =
-              distMouse < 200
-                ? "rgba(200,200,200,0.4)" // stronger near mouse
-                : "rgba(150,150,150,0.15)";
+            ctx.strokeStyle = distMouse < 200 ? "rgba(200,200,200,0.4)" : "rgba(150,150,150,0.15)";
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
 
-        // Move stars
-        s.x += s.dx;
-        s.y += s.dy;
+        s.x += s.dx; s.y += s.dy;
         if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
         if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
 
-        // Stars pulled slightly toward mouse
-        if (distMouse < 200) {
-          s.x += (mouse.x - s.x) * 0.002;
-          s.y += (mouse.y - s.y) * 0.002;
-        }
+        if (distMouse < 200) { s.x += (mouse.x - s.x) * 0.002; s.y += (mouse.y - s.y) * 0.002; }
       }
     }
 
-    function animate() {
-      drawStars();
-      requestAnimationFrame(animate);
-    }
+    function animate() { drawStars(); requestAnimationFrame(animate); }
     animate();
+
+    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
+
+    hands.onResults((results) => {
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        const landmarks = results.multiHandLandmarks[0];
+        const x = landmarks[8].x * window.innerWidth;
+        const y = landmarks[8].y * window.innerHeight;
+
+        if (smoothX === null) { smoothX = x; smoothY = y; }
+        smoothX = smoothX * 0.8 + x * 0.2;
+        smoothY = smoothY * 0.8 + y * 0.2;
+
+        mouse.x = smoothX; mouse.y = smoothY;
+        cursor.style.left = `${smoothX}px`;
+        cursor.style.top = `${smoothY}px`;
+
+        const thumb = landmarks[4];
+        const pinchDist = Math.hypot((thumb.x - landmarks[8].x) * window.innerWidth, (thumb.y - landmarks[8].y) * window.innerHeight);
+
+        if (pinchDist < 40 && !pinchCooldown) {
+          if (!pinchStart) pinchStart = Date.now();
+          if (Date.now() - pinchStart > 150) {
+            cursor.style.background = "lime";
+            document.elementFromPoint(smoothX, smoothY)?.click();
+            pinchCooldown = true;
+            setTimeout(() => { pinchCooldown = false; cursor.style.background = "cyan"; }, 500);
+          }
+        } else {
+          pinchStart = null;
+        }
+
+        const palm = landmarks[0];
+        const dy = palm.y * window.innerHeight - smoothY;
+        if (Math.abs(dy) > 80) {
+          window.scrollBy({ top: dy > 0 ? 200 : -200, behavior: 'smooth' });
+          showSwipeFeedback();
+        }
+      }
+    });
+
+    const video = document.createElement("video");
+    video.style.display = "none";
+    document.body.appendChild(video);
+
+    const camera = new Camera(video, {
+      onFrame: async () => { await hands.send({ image: video }); },
+      width: 640,
+      height: 480
+    });
+    camera.start();
   </script>
 </body>
 </html>
