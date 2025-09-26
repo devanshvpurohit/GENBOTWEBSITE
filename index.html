@@ -5,31 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>GENBOT Robotics Club</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet"/>
-
   <style>
-    :root {
-      --background-dark: #000000;
-      --text-metallic: #d3d3d3;
-      --text-medium: #a0a0a0;
-      --element-black: #000000;
-      --button-bg: #222222;
-      --button-text: #FFFFFF;
-      --subtle-graphic: #444444;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
+      margin: 0;
       font-family: 'Orbitron', sans-serif;
-      color: var(--text-metallic);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
       background: black;
+      color: #d3d3d3;
       overflow-x: hidden;
     }
-
     canvas#constellation {
       position: fixed;
       top: 0;
@@ -39,90 +22,72 @@
       z-index: -1;
       display: block;
     }
-
+    canvas#cursorCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
     nav {
-      background-color: rgba(17, 17, 17, 0.9);
+      background: rgba(17,17,17,0.9);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--subtle-graphic);
-      position: relative;
-      z-index: 2;
+      border-bottom: 1px solid #444;
     }
-
-    nav .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-metallic); }
-
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-
-    nav ul li a {
-      color: var(--text-metallic);
-      text-decoration: none;
+    nav .logo {
+      font-size: 1.5rem;
       font-weight: bold;
-      transition: color 0.3s ease;
+      color: #d3d3d3;
     }
-
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul li a {
+      color: #d3d3d3;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
     nav ul li a:hover { color: #00ffff; }
-
-    .layout { display: flex; flex: 1; min-height: 100vh; flex-direction: row; position: relative; z-index: 1; }
-
-    .left-side { flex: 1; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; position: relative; }
-
-    .ghost-text {
-      position: absolute; top: 10%; left: 5%; font-size: 8rem;
-      color: var(--subtle-graphic); font-weight: bold; opacity: 0.1;
-      z-index: 0; pointer-events: none; user-select: none;
+    .layout {
+      display: flex;
+      min-height: 100vh;
     }
-
-    .content { z-index: 1; position: relative; max-width: 600px; }
-    .content h1 { font-size: 3rem; margin-bottom: 1rem; color: var(--text-metallic); }
-    .content p { font-size: 1rem; color: var(--text-medium); margin-bottom: 2rem; line-height: 1.6; }
-
+    .left-side {
+      flex: 1;
+      padding: 4rem 3rem;
+      display: flex;
+      align-items: center;
+    }
+    .content h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .content p { color: #a0a0a0; margin-bottom: 2rem; line-height: 1.6; }
     .buttons { display: flex; gap: 1rem; }
-
-    .btn { padding: 0.75rem 1.5rem; border: none; font-size: 0.9rem; font-weight: bold; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; }
-    .btn-dark { background-color: var(--button-bg); color: var(--button-text); }
-    .btn-dark:hover { background-color: #000; }
-    .btn-outline { background: transparent; color: var(--text-metallic); border: 2px solid var(--text-metallic); }
-    .btn-outline:hover { background: var(--text-metallic); color: var(--element-black); }
-
-    .right-side { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0; }
-    .right-side iframe { width: 100%; height: 100%; min-height: 100vh; border: none; }
-
+    .btn { padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: bold; cursor: pointer; }
+    .btn-dark { background: #222; color: #fff; border: none; }
+    .btn-dark:hover { background: #000; }
+    .btn-outline { background: transparent; border: 2px solid #d3d3d3; color: #d3d3d3; }
+    .btn-outline:hover { background: #d3d3d3; color: #000; }
+    .right-side { flex: 1; display: flex; }
+    .right-side iframe { width: 100%; height: 100vh; border: none; }
     footer {
-      text-align: center; font-size: 0.85rem; padding: 1rem;
-      color: var(--text-medium); border-top: 1px solid var(--subtle-graphic);
-      background: rgba(13, 13, 13, 0.9); position: relative; z-index: 2;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.85rem;
+      background: rgba(13,13,13,0.9);
+      border-top: 1px solid #444;
     }
-
-    #cursor {
-      position: fixed; width: 20px; height: 20px;
-      background: cyan; border-radius: 50%;
-      pointer-events: none; transform: translate(-50%, -50%);
-      z-index: 1000; mix-blend-mode: difference;
-      transition: background 0.2s ease;
-    }
-
-    .swipe-feedback {
-      position: fixed; top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 1.5rem; color: #00ffff;
-      opacity: 0; transition: opacity 0.3s ease;
-      z-index: 1001; pointer-events: none;
-    }
-
-    @media (max-width: 960px) {
-      .layout { flex-direction: column-reverse; }
-      nav ul { flex-direction: column; gap: 1rem; text-align: center; padding-top: 1rem; }
-      .ghost-text { font-size: 4rem; top: 5%; left: 3%; }
-      .content h1 { font-size: 2rem; }
-      .right-side iframe { min-height: 400px; }
-    }
+    video#webcam { display: none; }
   </style>
 </head>
-
 <body>
   <canvas id="constellation"></canvas>
+  <canvas id="cursorCanvas"></canvas>
 
   <nav>
     <div class="logo">GENBOT</div>
@@ -136,47 +101,49 @@
 
   <div class="layout">
     <div class="left-side">
-      <div class="ghost-text">GENBOT</div>
       <div class="content">
         <h1>Welcome to GenBot</h1>
-        <p>Explore the future of robotics with NexBot — our cutting-edge student-built robot. At GenBot Robotics Club, we innovate, code, and design with passion. Join us in building the next generation of intelligent machines.</p>
+        <p>
+          Explore the future of robotics with NexBot — our student-built robot. At GenBot Robotics Club, we innovate, code, and design with passion.
+        </p>
         <div class="buttons">
           <button onclick="window.open('https://www.instagram.com/genbot_iare','_blank')" class="btn btn-dark">Join us on Instagram</button>
           <button class="btn btn-outline">Explore More</button>
         </div>
       </div>
     </div>
-
     <div class="right-side">
       <iframe src="https://my.spline.design/nexbotrobotcharacterconcept-XDFrw2PwRDLU1KM9cIXPjpVO/" allowfullscreen></iframe>
     </div>
   </div>
 
   <footer>
-    GenBot Robotics Club – IARE, Hyderabad | 📧 robotics@iare.ac.in | 📱 +91 8074237354<br />
+    GenBot Robotics Club – IARE, Hyderabad | 📧 robotics@iare.ac.in | 📱 +91 8074237354<br/>
     &copy; 2025 GENBOT. Powered by J.A.R.V.I.S.
   </footer>
 
-  <div id="cursor"></div>
-  <div class="swipe-feedback" id="swipeFeedback">Swipe!</div>
+  <video id="webcam" autoplay playsinline></video>
 
+  <!-- MediaPipe Hands -->
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
-
   <script>
     const canvas = document.getElementById("constellation");
     const ctx = canvas.getContext("2d");
-    const cursor = document.getElementById("cursor");
-    const swipeFeedback = document.getElementById("swipeFeedback");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const cursorCanvas = document.getElementById("cursorCanvas");
+    const cursorCtx = cursorCanvas.getContext("2d");
+    cursorCanvas.width = window.innerWidth;
+    cursorCanvas.height = window.innerHeight;
 
     let stars = [];
     const starCount = 120;
-    let mouse = { x: null, y: null };
+    let cursor = { x: null, y: null, clicked: false };
 
-    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
+    let lastY = null;
+    let scrollCooldown = false;
 
     for (let i = 0; i < starCount; i++) {
       stars.push({
@@ -188,25 +155,23 @@
       });
     }
 
-    let smoothX = null, smoothY = null;
-    let pinchStart = null;
-    let pinchCooldown = false;
-
-    function showSwipeFeedback() {
-      swipeFeedback.style.opacity = 1;
-      setTimeout(() => { swipeFeedback.style.opacity = 0; }, 500);
-    }
-
     function drawStars() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
-        const distMouse = mouse.x ? Math.hypot(s.x - mouse.x, s.y - mouse.y) : Infinity;
+        const distCursor = cursor.x ? Math.hypot(s.x - cursor.x, s.y - cursor.y) : Infinity;
 
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        if (distMouse < 150) { ctx.fillStyle = "#fff"; ctx.shadowBlur = 10; ctx.shadowColor = "#aaa"; }
-        else { ctx.fillStyle = "#888"; ctx.shadowBlur = 0; }
+        if (distCursor < 150) {
+          ctx.fillStyle = "#fff";
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = "#aaa";
+        } else {
+          ctx.fillStyle = "#888";
+          ctx.shadowBlur = 0;
+        }
         ctx.fill();
 
         for (let j = i + 1; j < stars.length; j++) {
@@ -216,70 +181,87 @@
             ctx.beginPath();
             ctx.moveTo(s.x, s.y);
             ctx.lineTo(s2.x, s2.y);
-            ctx.strokeStyle = distMouse < 200 ? "rgba(200,200,200,0.4)" : "rgba(150,150,150,0.15)";
+            ctx.strokeStyle = distCursor < 200 ? "rgba(200,200,200,0.4)" : "rgba(150,150,150,0.15)";
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
 
-        s.x += s.dx; s.y += s.dy;
+        s.x += s.dx;
+        s.y += s.dy;
         if (s.x < 0 || s.x > canvas.width) s.dx *= -1;
         if (s.y < 0 || s.y > canvas.height) s.dy *= -1;
 
-        if (distMouse < 200) { s.x += (mouse.x - s.x) * 0.002; s.y += (mouse.y - s.y) * 0.002; }
+        if (distCursor < 200) {
+          s.x += (cursor.x - s.x) * 0.002;
+          s.y += (cursor.y - s.y) * 0.002;
+        }
       }
     }
 
-    function animate() { drawStars(); requestAnimationFrame(animate); }
+    function drawCursor() {
+      cursorCtx.clearRect(0, 0, cursorCanvas.width, cursorCanvas.height);
+      if (cursor.x && cursor.y) {
+        cursorCtx.beginPath();
+        cursorCtx.arc(cursor.x, cursor.y, cursor.clicked ? 20 : 15, 0, Math.PI * 2);
+        cursorCtx.fillStyle = cursor.clicked ? "rgba(0,255,255,0.6)" : "rgba(255,255,255,0.6)";
+        cursorCtx.fill();
+      }
+    }
+
+    function animate() {
+      drawStars();
+      drawCursor();
+      requestAnimationFrame(animate);
+    }
     animate();
 
-    const hands = new Hands({ locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}` });
+    // Setup MediaPipe Hands
+    const videoElement = document.getElementById('webcam');
+    const hands = new Hands({locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`});
     hands.setOptions({ maxNumHands: 1, modelComplexity: 1, minDetectionConfidence: 0.7, minTrackingConfidence: 0.7 });
 
     hands.onResults((results) => {
       if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-        const landmarks = results.multiHandLandmarks[0];
-        const x = landmarks[8].x * window.innerWidth;
-        const y = landmarks[8].y * window.innerHeight;
+        const hand = results.multiHandLandmarks[0];
+        const indexFinger = hand[8];
+        const thumbTip = hand[4];
 
-        if (smoothX === null) { smoothX = x; smoothY = y; }
-        smoothX = smoothX * 0.8 + x * 0.2;
-        smoothY = smoothY * 0.8 + y * 0.2;
+        cursor.x = indexFinger.x * canvas.width;
+        cursor.y = indexFinger.y * canvas.height;
 
-        mouse.x = smoothX; mouse.y = smoothY;
-        cursor.style.left = `${smoothX}px`;
-        cursor.style.top = `${smoothY}px`;
+        // Simple pinch detection for click
+        const dist = Math.hypot(
+          (indexFinger.x - thumbTip.x) * canvas.width,
+          (indexFinger.y - thumbTip.y) * canvas.height
+        );
 
-        const thumb = landmarks[4];
-        const pinchDist = Math.hypot((thumb.x - landmarks[8].x) * window.innerWidth, (thumb.y - landmarks[8].y) * window.innerHeight);
+        cursor.clicked = dist < 40;
 
-        if (pinchDist < 40 && !pinchCooldown) {
-          if (!pinchStart) pinchStart = Date.now();
-          if (Date.now() - pinchStart > 150) {
-            cursor.style.background = "lime";
-            document.elementFromPoint(smoothX, smoothY)?.click();
-            pinchCooldown = true;
-            setTimeout(() => { pinchCooldown = false; cursor.style.background = "cyan"; }, 500);
+        if (cursor.clicked) {
+          const element = document.elementFromPoint(cursor.x, cursor.y);
+          if (element && element.click) {
+            element.click();
           }
-        } else {
-          pinchStart = null;
         }
 
-        const palm = landmarks[0];
-        const dy = palm.y * window.innerHeight - smoothY;
-        if (Math.abs(dy) > 80) {
-          window.scrollBy({ top: dy > 0 ? 200 : -200, behavior: 'smooth' });
-          showSwipeFeedback();
+        // Scroll gesture detection (vertical movement)
+        if (lastY !== null && !scrollCooldown) {
+          const deltaY = cursor.y - lastY;
+          if (Math.abs(deltaY) > 60) {
+            window.scrollBy({ top: deltaY > 0 ? 200 : -200, behavior: 'smooth' });
+            scrollCooldown = true;
+            setTimeout(() => { scrollCooldown = false; }, 800);
+          }
         }
+        lastY = cursor.y;
       }
     });
 
-    const video = document.createElement("video");
-    video.style.display = "none";
-    document.body.appendChild(video);
-
-    const camera = new Camera(video, {
-      onFrame: async () => { await hands.send({ image: video }); },
+    const camera = new Camera(videoElement, {
+      onFrame: async () => {
+        await hands.send({image: videoElement});
+      },
       width: 640,
       height: 480
     });
